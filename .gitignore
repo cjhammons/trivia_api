@@ -1,2 +1,7 @@
 /env
 /frontend/node_modules
+
+db-reset.sh
+run-backend.sh
+run-frontend.sh
+unittest.sh
