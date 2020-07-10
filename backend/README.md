@@ -66,29 +66,79 @@ One note before you delve into your tasks: for each endpoint you are expected to
 8. Create a POST endpoint to get questions to play the quiz. This endpoint should take category and previous question parameters and return a random questions within the given category, if provided, and that is not one of the previous questions. 
 9. Create error handlers for all expected errors including 400, 404, 422 and 500. 
 
-REVIEW_COMMENT
-```
-This README is missing documentation of your endpoints. Below is an example for your endpoint to get all categories. Please use it as a reference for creating your documentation and resubmit your code. 
 
-Endpoints
+## API Documentation
+### Endpoints
 GET '/categories'
-GET ...
-POST ...
-DELETE ...
 
-GET '/categories'
+GET '/questions'
+
+POST '/questions'
+
+POST '/questions/search'
+
+POST '/quizzes'
+
+DELETE '/questions'
+
+### 
+
+#### GET '/categories'
 - Fetches a dictionary of categories in which the keys are the ids and the value is the corresponding string of the category
 - Request Arguments: None
 - Returns: An object with a single key, categories, that contains a object of id: category_string key:value pairs. 
+``` 
 {'1' : "Science",
 '2' : "Art",
 '3' : "Geography",
 '4' : "History",
 '5' : "Entertainment",
 '6' : "Sports"}
-
 ```
 
+#### GET '/questions'
+- Fetches dictionaries of questions and categories. Pages can be paginated by 10.
+- Request Arguments:
+    - *optional* ```page```: Page of questions to be returned. page=1 would return questions 1-10, page-2 11-20, etc.
+- Returns: 
+    - ``success``: bool indicating a success
+    - ``questions``: An array of 10 questions. Questions are structured s follows:
+        - ``id``: unique int id of question object
+        - ``question``: String value of the question text
+        - ``answer``: String value of the answer text
+        - ``category``: unique int id of the category of the question
+        - ``difficulty``: int value indicating the difficulty of the question, higher means more difficult.
+
+#### POST '/questions'
+- Adds a new question
+- Request Arguments: none
+- Request params:
+    - ``question``: String value of the question text
+    - ``answer``: String value of the answer text
+    - ``category``: unique int id of the category of the question
+    - ``difficulty``: int value indicating the difficulty of the question, higher means more difficult.
+
+
+#### POST '/questions/search'
+- Performs a search of all questions. If a search term is provided, the a search is performed on all question texts that contain the substring of the search term.
+- Request Params:
+    -``searchTerm``: String value to search for in question text
+- Returns: All questions that contain the given search term as a substring
+
+#### GET '/categories/{category_id}/questions
+- Gets all questions of a given category
+- Request Arguments: 
+    - ``category_id``: id of the category of questions to be returned
+- Returns: All questions in a given category
+
+#### POST '/quizzes'
+- Used to play the quiz. Gets a random question of a given category.
+- Request Params:
+    - ``quiz_category``: int id of the category. Set to 0 if you want all categories
+    - ``previous_questions``: array of question objects that have already been asked and should be excluded from the pool of potential next questions.
+- Returns:
+    - ``success``: boolean of success
+    - ``question``: The randomly selected question to be used next in the quiz
 
 ## Testing
 To run the tests, run
