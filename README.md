@@ -1,6 +1,8 @@
 Trivia API
 ------
 
+API for playing a trivia game. The main purpose of this project was to learn unittesting practices for Flask. 
+
 ### Technologies Used
 - Python
 - Flask
